@@ -2,9 +2,6 @@ const { size, internDetails, engineerDetails, managerDetails } = require('./lib/
 const { employee, home } = require('./lib/template');
 const fs = require('fs');
 const path = require('path');
-const Manager = require('./lib/Manager');
-const Engineer = require('./lib/Engineer');
-const Intern = require('./lib/Intern');
 
 // store team size 
 async function getTeam() {
@@ -14,18 +11,6 @@ async function getTeam() {
         engineers: await engineerDetails(engineersTotal),
         interns: await internDetails(internsTotal)
     }
-    // Test code
-    // const team = {
-    //     manager: new Manager('m1', 'Matt', 'matt@gmail.com', 212), 
-    //     engineers: [
-    //         new Engineer('e1', 'Moojig', 'moojigc@gmail.com', 'moojigc'),
-    //         new Engineer('e2', 'Moojig2', 'moojigc2@gmail.com', 'moojigc2'),
-    //     ],
-    //     interns: [
-    //         new Intern('i1', 'Alex', 'alex@gmail.com', 'UConn'),
-    //         new Intern('i2', 'Alex2', 'alex2@gmail.com', 'NYU'),
-    //     ]
-    // }
     return team;
 }
 // Writes .html file to /output folder using 'path' module

@@ -16,7 +16,7 @@ describe('Engineer subclass', () => {
 
     describe('getGithub', () => {
         it('should return the GitHub username', () => {
-            expect(ENG.getGithub()).toEqual('johns');
+            expect(ENG.getGithub()).toEqual('GitHub: johns');
         });
     });
 

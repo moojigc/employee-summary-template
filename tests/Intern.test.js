@@ -16,7 +16,7 @@ describe('Intern subclass', () => {
 
     describe('getSchool', () => {
         it('should return the school name', () => {
-            expect(INT.getSchool()).toEqual('NYU');
+            expect(INT.getSchool()).toEqual('School: NYU');
         });
     });
 

@@ -127,6 +127,12 @@ main .card:hover {
 }
 
 @media screen and (max-width: 768px) {
+    :root {
+        font-size: 16px;
+    }
+    .jumbotron .display-4 {
+        font-size: 3rem;
+    }
     .grid-container {
         background: var(--transluscent);
         border-radius: 0.5rem;

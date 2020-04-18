@@ -1,0 +1,29 @@
+{
+  "name": "employee-summary-template",
+  "version": "1.0.0",
+  "description": "Generates an HTML page for your developement team.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moojigc/employee-summary-template.git"
+  },
+  "author": "Moojig Battsogt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moojigc/employee-summary-template/issues"
+  },
+  "homepage": "https://github.com/moojigc/employee-summary-template#readme",
+  "devDependencies": {
+    "jest": "^25.3.0"
+  },
+  "dependencies": {
+    "inquirer": "^7.1.0"
+  }
+}

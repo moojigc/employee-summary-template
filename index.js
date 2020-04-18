@@ -14,45 +14,63 @@ async function getTeam() {
         engineers: await engineerDetails(engineersTotal),
         interns: await internDetails(internsTotal)
     }
-    
+    // Test code
+    // const team = {
+    //     manager: new Manager('m1', 'Matt', 'matt@gmail.com', 212), 
+    //     engineers: [
+    //         new Engineer('e1', 'Moojig', 'moojigc@gmail.com', 'moojigc'),
+    //         new Engineer('e2', 'Moojig2', 'moojigc2@gmail.com', 'moojigc2'),
+    //     ],
+    //     interns: [
+    //         new Intern('i1', 'Alex', 'alex@gmail.com', 'UConn'),
+    //         new Intern('i2', 'Alex2', 'alex2@gmail.com', 'NYU'),
+    //     ]
+    // }
     return team;
 }
-
-function writeToHTML(fileName, HTML) {
-    fs.writeFile(path.resolve(__dirname, 'output', fileName), HTML, function(err) {
+// Writes .html file to /output folder using 'path' module
+function writeToHTML(data, fileName) {
+    fs.writeFile(path.resolve(__dirname, 'output', `${fileName}.html`), data, function(err) {
         if (err) console.log(err);
         else console.log('Write success!');
     })
 }
 
-async function printToHTML() {
-    const { manager, engineers, interns } = await getTeam();
-    function engineersLI() {
-        const allEng = [];
-        for (engineer of engineers) {
-            allEng.push(engineer.listElement('Engineer'));
-        };
-        return allEng.join('\n');
-    };   
-    function internsLI() {
-        const allInt = [];
-        for (intern of interns) {
-            allInt.push(intern.listElement('Intern'));
-        };
-        return allInt.join('\n');
-    };   
+async function printToHTML(people) {
+    const { manager, engineers, interns } = await people;
 
-    const homePage = home(manager.listElement('Manager'), engineersLI(), internsLI());
-    writeToHTML('home.html', homePage);
+    function loopListElements(members, cat) {
+        const allMembers = [];
+        for (member of members) {
+            allMembers.push(member.listElement(cat));
+        }
+        return allMembers.join('\n');
+    }   
+
+    // create the home.html using the home() function which returns a template literal
+    const homePage = home(manager.listElement('Manager'), loopListElements(engineers, 'Engineer'), loopListElements(interns, 'Intern'));
+    writeToHTML(homePage, 'home');
     
+    // manager page
+    let managerPage = employee(manager, 'Manager', manager.listElement('Manager'), 
+    loopListElements(engineers, 'Engineer'), loopListElements(interns, 'Intern'));
+    writeToHTML(managerPage, manager.name + manager.id);
+    
+    // Iterate over engineers and interns to create individual .html pages
     for (engineer of engineers) {
-        let employeePage = employee(engineer, 'Engineer', manager.listElement('Manager'), engineersLI(), internsLI());
-        writeToHTML(`${engineer.name}.html`, employeePage) 
+        let employeePage = employee(engineer, 'Engineer', manager.listElement('Manager'), loopListElements(engineers, 'Engineer'), loopListElements(interns, 'Intern'));
+        writeToHTML(employeePage, engineer.name + engineer.id);
     }
     for (intern of interns) {
-        let employeePage = employee(intern, 'Intern', manager.listElement('Manager'), engineersLI(), internsLI());
-        writeToHTML(`${intern.name}.html`, employeePage) 
+        let employeePage = employee(intern, 'Intern', manager.listElement('Manager'), loopListElements(engineers, 'Engineer'), loopListElements(interns, 'Intern'));
+        writeToHTML(employeePage, intern.name + intern.id); 
     }
 }
 
-printToHTML();
+// call function and pass it the getTeam() inquirer function
+printToHTML(getTeam());
+
+module.exports = {
+    printToHTML: printToHTML,
+    getTeam: getTeam
+}

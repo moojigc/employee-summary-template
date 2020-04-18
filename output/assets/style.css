@@ -96,7 +96,7 @@ main .card {
 
 main .card:hover {
     box-shadow: rgba(2, 8, 20, 0.1) 0px 0.35em 1.175em, rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;
-    transform: translateY(-0.5rem) scale(1.1);
+    transform: translateY(-0.5rem) scale(1.05);
 }
 
 .card {
@@ -130,7 +130,6 @@ main .card:hover {
     .grid-container {
         background: var(--transluscent);
         border-radius: 0.5rem;
-        box-shadow: 0px 0px 1rem 0.5rem lightgray;
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 6fr;
